@@ -21,7 +21,7 @@ class SendEmail:
 
         # We reference the image in the IMG SRC attribute by the ID we give it below
         self.msgText = MIMEText(
-            'Website <b><i>%s</i> </b> got updated. \rScreenshot: \r <br><img src="cid:image1"><br>' % web, 'html')
+            'Website <b><i>%s</i> </b> got updated. \r Screenshot: \r <br><img src="cid:image1"><br>' % web, 'html')
         self.msgAlternative.attach(self.msgText)
 
         # This example assumes the image is in the current directory

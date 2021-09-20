@@ -45,8 +45,6 @@ def monitor(webs):
                 # perform the get request and store it in a var
                 new_pattern = request(web)
                 if (new_pattern != old_pattern):  # 判断内容列表是否更新
-                    #pass new_pattern to old
-                    old_pattern = new_pattern
                     #Take web screenshot
                     screenshot(web)
                     #sending emails out
