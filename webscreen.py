@@ -1,5 +1,3 @@
-#coding=utf-8
-import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 

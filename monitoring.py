@@ -1,20 +1,10 @@
-#Importing libraries
-import time
-import hashlib
-from urllib.request import urlopen, Request
-from emailing import SendEmail
-from webscreen import screenshot
 import time
 import re
 import requests
+from webscreen import screenshot
+from emailing import SendEmail
 import datetime
-import smtplib
 
-
-# web = 'http://localhost:8888/notebooks/Documents/Python%20Scripts/Web%20Monitor.ipynb'
-# # setting the URL you want to monitor
-# url = Request(web,
-#               headers={'User-Agent': 'Mozilla/5.0'})
 
 def request(web):
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 \

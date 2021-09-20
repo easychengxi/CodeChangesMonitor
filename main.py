@@ -1,10 +1,9 @@
-import time
-import hashlib
-from urllib.request import urlopen, Request
-import smtplib
+#Import modules
 from emailing import SendEmail
 from monitoring import monitor
+from webscreen import screenshot
 
+#Monitor webs
 webs = ['https://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets/HCPCS-Quarterly-Update',
         'https://www.cms.gov/Medicare/Coding/ICD10',
         'https://www.cms.gov/medicare/icd-10/2022-icd-10-cm',
