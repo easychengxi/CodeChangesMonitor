@@ -5,9 +5,11 @@ from webscreen import screenshot
 from emailing import SendEmail
 import datetime
 import random
-from  fake_useragent   import  UserAgent
+from fake_useragent import UserAgent
+import http.client
 
 def request(web):
+    http.client._MAXLINE = 524288
     ua = UserAgent()
     headers = {'User-Agent': ua.random}
     # headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 \
