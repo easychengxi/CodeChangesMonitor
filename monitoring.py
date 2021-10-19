@@ -28,10 +28,14 @@ def request(web):
     # https://www.ama-assn.org/practice-management/cpt/category-iii-codes \
     # https://www.ama-assn.org/practice-management/cpt/cpt-pla-codes
 
+    # '<td headers=(.*?)</a>'
+    #https: // www.cms.gov / Medicare / Coding / HCPCSReleaseCodeSets / Alpha - Numeric - HCPCS
+
     pattern = re.compile('href="/files/(.*?)</a>').findall(content) + \
               re.compile('<a href="/Medicare/Coding/ICD10/(.*?)</a>').findall(content) + \
               re.compile('<a href="/practice-management/cpt/(.*?)</a>').findall(content) + \
-              re.compile('<a href="https://www.ama-assn.org/(.*?)</a>').findall(content)
+              re.compile('<a href="https://www.ama-assn.org/(.*?)</a>').findall(content) + \
+              re.compile('<td headers=(.*?)</a>').findall(content)
     return pattern  #运行qingqiu()函数，会返回pattern的值
 
 
