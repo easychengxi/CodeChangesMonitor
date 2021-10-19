@@ -11,7 +11,8 @@ webs = ['https://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets/HCPCS-Quarterl
         'https://www.ama-assn.org/practice-management/cpt',
         'https://www.ama-assn.org/practice-management/cpt/category-i-vaccine-codes',
         'https://www.ama-assn.org/practice-management/cpt/category-iii-codes',
-        'https://www.ama-assn.org/practice-management/cpt/cpt-pla-codes'
+        'https://www.ama-assn.org/practice-management/cpt/cpt-pla-codes',
+        'https://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets/Alpha-Numeric-HCPCS'
         ]
 
 def main(webs):
