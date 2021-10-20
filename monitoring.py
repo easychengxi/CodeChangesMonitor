@@ -7,9 +7,13 @@ import datetime
 
 
 def request(web):
+    proxies={
+        "http": "http://68.114.205.121:443" #must use ""
+        "https" "https://68.114.205.121:443"
+    }
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 \
                     (KHTML, like Gecko) Chrome/14.0.835.163 Safari/535.1'}     #设置headers信息，模拟成浏览器取访问网站
-    req = requests.get(web, headers=headers,allow_redirects=False)   #向网站发起请求，并获取响应对象
+    req = requests.get(web, headers=headers, proxies=proxies,allow_redirects=False)   #向网站发起请求，并获取响应对象
     content = req.text   #获取网站源码
 
     #'href="/files/(.*?)</a>'
