@@ -6,7 +6,7 @@ from email.mime.multipart import MIMEMultipart
 class SendEmail:
     def __init__(self, web):
         self.strFrom = 'MCGsystemcontrol@gmail.com'
-        self.strTo = ['chengxi.gao@mcg.com','erin.johnson@mcg.com']
+        self.strTo = ['chengxi.gao@mcg.com','erin.johnson@mcg.com','lashana.narayan@mcg.com']
         # Create the root message and fill in the from, to, and subject headers
         self.msgRoot = MIMEMultipart('related')
         self.msgRoot['Subject'] = 'Web page got updated'
