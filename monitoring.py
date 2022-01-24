@@ -40,27 +40,35 @@ def request(web):
               re.compile('<a href="/practice-management/cpt/(.*?)</a>').findall(content) + \
               re.compile('<a href="https://www.ama-assn.org/(.*?)</a>').findall(content) + \
               re.compile('<td headers=(.*?)</a>').findall(content)
+              # re.compile('<a href = "https://www.ama-assn.org/system/files/(.*?)</a>').findall(content) + \
     return pattern  #运行qingqiu()函数，会返回pattern的值
 
 
 def monitor(webs):
     print("running")
+    old_patterns = {}
+    new_patterns = {}
     while True:
         try:
             for web in webs:
-                old_pattern = request(web)
-                time.sleep(3600)
-                # perform the get request and store it in a var
-                new_pattern = request(web)
-                if (new_pattern != old_pattern):  # 判断内容列表是否更新
-                    #Take web screenshot
-                    screenshot(web)
-                    #sending emails out
-                    SendEmail(web).emailout()
+                old_patterns.update({web: request(web)})
 
-                else:
-                    now = datetime.datetime.now()
-                    print(now,"%s has no updates"%web)
+            time.sleep(3600)
+
+            for web in webs:
+                new_patterns.update({web: request(web)})
+
+            diffkeys = [k for k in new_patterns if new_patterns[k] != old_patterns[k]]
+            if diffkeys != []:
+                # Take web screenshot
+                for website in diffkeys:
+                    screenshot(website)
+                # sending emails out
+                    SendEmail(website).emailout()
+            else:
+                now = datetime.datetime.now()
+                for web in webs:
+                    print(now, "%s has no updates" % web)
 
 
 
