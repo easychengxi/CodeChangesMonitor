@@ -2,6 +2,11 @@ import time
 import re
 import requests
 import datetime
+from emailing import SendEmail
+from monitoring import monitor
+from emailing import SendEmail
+from monitoring import monitor
+
 
 
 web = 'https://www.ama-assn.org/practice-management/cpt/category-i-vaccine-codes'
@@ -77,36 +82,65 @@ def request(web):
     return pattern  #运行qingqiu()函数，会返回pattern的值
 
 
-webs = {'https://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets/HCPCS-Quarterly-Update',
-        'https://www.cms.gov/Medicare/Coding/ICD10',
-        'https://www.cms.gov/medicare/icd-10/2022-icd-10-cm',
-        'https://www.cms.gov/medicare/icd-10/2022-icd-10-pcs',
-        'https://www.ama-assn.org/practice-management/cpt',
-        'https://www.ama-assn.org/practice-management/cpt/category-i-vaccine-codes',
-        'https://www.ama-assn.org/practice-management/cpt/category-iii-codes',
-        'https://www.ama-assn.org/practice-management/cpt/cpt-pla-codes',
-        'https://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets/Alpha-Numeric-HCPCS'
-        }
-#Assign patterns as old patterns
-old_patterns = {}
-new_patterns = {}
-for web in webs:
-    old_patterns.update({web: request(web)})
 
-#time.sleep(3600)
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 
-for web in webs:
-    new_patterns.update({web: request(web)})
+def screenshot(web):
+    options = webdriver.ChromeOptions()
+    options.headless = True
+    driver = webdriver.Chrome(options=options, executable_path='./chromedriver.exe')
 
-diffkeys = [k for k in new_patterns if new_patterns[k] != old_patterns[k]]
-if diffkeys !=[]:
-    #Take web screenshot
-    screenshot(web)
-    # sending emails out
-    SendEmail(web).emailout()
-else:
-    now = datetime.datetime.now()
-    print(now, "%s has no updates" % web)
+    driver.get(web)
+
+    S = lambda X: driver.execute_script('return document.body.parentNode.scroll'+X)
+    driver.set_window_size(S('Width'),S('Height')) # May need manual adjustment
+    driver.find_element_by_tag_name('body').screenshot('web_screenshot.png')
+
+    driver.quit()
+
+web = 'https://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets/HCPCS-Quarterly-Update'
+screenshot(web)
+#
+# webs = {#'https://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets/HCPCS-Quarterly-Update',
+#         # 'https://www.cms.gov/Medicare/Coding/ICD10',
+#         # 'https://www.cms.gov/medicare/icd-10/2022-icd-10-cm',
+#         # 'https://www.cms.gov/medicare/icd-10/2022-icd-10-pcs',
+#         # 'https://www.ama-assn.org/practice-management/cpt',
+#         'https://www.ama-assn.org/practice-management/cpt/category-i-vaccine-codes'#,
+#         # 'https://www.ama-assn.org/practice-management/cpt/category-iii-codes',
+#         # 'https://www.ama-assn.org/practice-management/cpt/cpt-pla-codes',
+#         # 'https://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets/Alpha-Numeric-HCPCS'
+#         }
+# #Assign patterns as old patterns
+# old_patterns = {}
+# new_patterns = {}
+# for web in webs:
+#     old_patterns.update({web: request(web)})
+#
+# for web in webs:
+#     new_patterns.update({web: request(web)})
+#
+# diffkeys = [k for k in new_patterns if new_patterns[k] == old_patterns[k]]
+# print(diffkeys)
+# #time.sleep(3600)
+# for website in diffkeys:
+#     SendEmail(website).emailout()
+
+
+# #for web in webs:
+#     new_patterns.update({web: request(web)})
+#
+# diffkeys = [k for k in new_patterns if new_patterns[k] != old_patterns[k]]
+# if diffkeys !=[]:
+#     #Take web screenshot
+#     screenshot(web)
+#     # sending emails out
+#     SendEmail(web).emailout()
+# else:
+#     now = datetime.datetime.now()
+#     print(now, "%s has no updates" % web)
 
     # if (new_pattern != old_pattern):  # 判断内容列表是否更新
     #     # Take web screenshot
