@@ -39,8 +39,9 @@ def request(web):
               re.compile('<a href="/Medicare/Coding/ICD10/(.*?)</a>').findall(content) + \
               re.compile('<a href="/practice-management/cpt/(.*?)</a>').findall(content) + \
               re.compile('<a href="https://www.ama-assn.org/(.*?)</a>').findall(content) + \
+              re.compile('<a href="https://www.ama-assn.org/system/files/(.*?)</a>').findall(content) + \
               re.compile('<td headers=(.*?)</a>').findall(content)
-              # re.compile('<a href = "https://www.ama-assn.org/system/files/(.*?)</a>').findall(content) + \
+        # re.compile('<a href = "https://www.ama-assn.org/system/files/(.*?)</a>').findall(content) + \
     return pattern  #运行qingqiu()函数，会返回pattern的值
 
 
